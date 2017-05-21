@@ -92,7 +92,7 @@ def resolve_all(x, default=None):
     if isinstance(x, list):
         x = [resolve_all(v, default=default) for v in x]
     elif isinstance(x, dict):
-        for (k, v) in x.iteritems():
+        for (k, v) in x.items():
             x[k] = resolve_all(v, default=default)
     return x
 
@@ -105,7 +105,7 @@ def decipher_all(decipher, objid, genno, x):
     if isinstance(x, list):
         x = [decipher_all(decipher, objid, genno, v) for v in x]
     elif isinstance(x, dict):
-        for (k, v) in x.iteritems():
+        for (k, v) in x.items():
             x[k] = decipher_all(decipher, objid, genno, v)
     return x
 
@@ -228,7 +228,7 @@ class PDFStream(PDFObject):
             params = [params]*len(filters)
         if STRICT and len(params) != len(filters):
             raise PDFException("Parameters len filter mismatch")
-        return zip(filters, params)
+        return list(zip(filters, params))
 
     def decode(self):
         assert self.data is None and self.rawdata is not None
